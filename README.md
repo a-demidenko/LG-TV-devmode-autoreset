@@ -1,2 +1,2 @@
 # LG-Devmode-reset
-reset TV LG dev mode timer to 999 minutes
+reset LG TV WebOS dev mode timer to 999 minutes
