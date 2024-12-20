@@ -1,1 +1,7 @@
+name = "TV-devmode-reset" # Имя вашего Worker
+main = "worker.js" # Укажите путь к основному файлу скрипта
+compatibility_date = "2024-12-20" # Укажите текущую дату
+type = "javascript" # Укажите тип проекта (javascript, modules или wasm)
 
+# Учетная запись Cloudflare
+account_id = "daf5cb28dfef9d3b8b583e5f7a8982c3" # ID вашей учетной записи Cloudflare
