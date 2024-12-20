@@ -1,2 +1,2 @@
 # LG-Devmode-reset
-reset TV LG dev mode timer 999 minutes
+reset TV LG dev mode timer to 999 minutes
