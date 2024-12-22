@@ -3,7 +3,7 @@ name: Deploy Worker
 on:
   push:
     branches:
-      - main # Деплой запускается при пуше в ветку main
+      - main
 
 jobs:
   deploy:
@@ -11,18 +11,24 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # Скачивает код репозитория
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Устанавливает Node.js 18 версии
+          node-version: 18
+
+      - name: Upgrade npm
+        run: npm install -g npm@latest
+
+      - name: Clean npm cache
+        run: npm cache clean --force
 
       - name: Install Dependencies
-        run: npm install # Устанавливает Wrangler и зависимости
+        run: npm install
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }} # API-токен из GitHub Secrets
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} # Account ID из GitHub Secrets
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
