@@ -3,22 +3,26 @@ name: Deploy Worker
 on:
   push:
     branches:
-      - main
+      - main # Деплой запускается при пуше в ветку main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Скачивает код репозитория
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Устанавливает Node.js 18 версии
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install # Устанавливает Wrangler и зависимости
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }} # API-токен из GitHub Secrets
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} # Account ID из GitHub Secrets
