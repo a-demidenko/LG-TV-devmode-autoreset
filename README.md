@@ -6,7 +6,7 @@
 
 A simple Cloudflare Worker that automatically resets the developer mode counter on NON-rooted LG TVs.
 
-**Language**: [🇬🇧 English](#english) | [🇷🇺 Русский](#russian)
+**Language**: [🇬🇧 English](#english) | [🇷🇺 Русский](#Русский)
 
 ## Table of Contents
 
