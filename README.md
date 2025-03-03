@@ -25,8 +25,8 @@ LG TVs have a developer mode that expires after a certain period. This Cloudflar
 
 1. Create a new [Cloudflare Worker](https://dash.cloudflare.com/) .
 2. Copy the code from [src/worker.js](src/worker.js) into the worker.
-3. Configure environment variables for your TV tokens. You can use the [dev-manager-desktop](https://github.com/webosbrew/dev-manager-desktop) program to obtain the tokens.
-4. Set a schedule for the worker to run (recommended: daily).
+3. Configure environment variables for your TV tokens. You can use the [dev-manager-desktop](https://github.com/webosbrew/dev-manager-desktop/releases/latest) program to obtain the tokens.
+4. Set a schedule for the worker to run.
 
 ### Configuration
 
@@ -70,8 +70,8 @@ https://developer.lge.com/secure/ResetDevMode.dev?sessionToken={YOUR_TOKEN}
 
 1. Создайте новый [Cloudflare Worker](https://dash.cloudflare.com/) .
 2. Скопируйте код из [src/worker.js](src/worker.js) в воркер.
-3. Настройте переменные окружения для токенов ваших телевизоров. Вы можете использовать программу [dev-manager-desktop](https://github.com/webosbrew/dev-manager-desktop) для получения токенов.
-4. Настройте расписание запуска воркера (рекомендуется: ежедневно).
+3. Настройте переменные окружения для токенов ваших телевизоров. Вы можете использовать программу [dev-manager-desktop](https://github.com/webosbrew/dev-manager-desktop/releases/latest) для получения токенов.
+4. Настройте расписание запуска воркера.
 
 ### Настройка
 
@@ -102,7 +102,3 @@ Cron
 ```
 https://developer.lge.com/secure/ResetDevMode.dev?sessionToken={ВАШ_ТОКЕН}
 ```
-
----
-
-Ссылки на Cloudflare Dashboard и программу для получения токенов теперь добавлены для обоих языков.
