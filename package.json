@@ -1,8 +1,0 @@
-{
-  "name": "tv-devmode-reset",
-  "version": "1.0.0",
-  "private": true,
-  "devDependencies": {
-    "@cloudflare/wrangler": "^2.14.2"
-  }
-}
