@@ -4,7 +4,7 @@
 [![LG webOS](https://img.shields.io/badge/LG-webOS-A50034?logo=lg&logoColor=white)](https://webostv.developer.lge.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-A simple Cloudflare Worker that automatically resets the developer mode counter on rooted LG TVs.
+A simple Cloudflare Worker that automatically resets the developer mode counter on NON-rooted LG TVs.
 
 **Language**: [English](#english) | [Русский](#russian)
 
