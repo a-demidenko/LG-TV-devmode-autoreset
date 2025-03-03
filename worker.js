@@ -7,12 +7,28 @@
  * 2. Настройте триггер по расписанию для автоматического запуска
  * 3. Или вызовите вручную через HTTP-запрос к вашему воркеру
  */
+
+/**
+ * @typedef {Object} TokenItem
+ * @property {string} name - Имя переменной окружения
+ * @property {string} token - Токен телевизора
+ */
+
+/**
+ * @typedef {Object} ResetResult
+ * @property {string} tv - Имя телевизора
+ * @property {number} [status] - HTTP статус ответа
+ * @property {string} [statusText] - Текст статуса ответа
+ * @property {string} [error] - Сообщение об ошибке
+ * @property {boolean} success - Флаг успешности операции
+ */
+
 export default {
   /**
    * Обработчик HTTP-запросов для ручного запуска сброса
    * @param {Request} request - Входящий HTTP-запрос
    * @param {Object} env - Переменные окружения воркера
-   * @returns {Response} JSON-ответ с результатами операций
+   * @returns {Promise<Response>} JSON-ответ с результатами операций
    */
   async fetch(request, env) {
     // Получаем все токены из переменных окружения
@@ -32,6 +48,7 @@ export default {
    * @param {Object} event - Событие планировщика
    * @param {Object} env - Переменные окружения воркера
    * @param {Object} ctx - Контекст выполнения
+   * @returns {Promise<void>} Ничего не возвращает
    */
   async scheduled(event, env, ctx) {
     console.log(`Запланированное событие запущено в: ${event.scheduledTime}`);
@@ -48,7 +65,7 @@ export default {
   /**
    * Получает все токены телевизоров из переменных окружения
    * @param {Object} env - Переменные окружения воркера
-   * @returns {Array} Массив токенов
+   * @returns {TokenItem[]} Массив токенов
    */
   getTokensFromEnv(env) {
     // Ищем все переменные окружения, начинающиеся с "TOKEN_TV"
@@ -63,8 +80,8 @@ export default {
 
   /**
    * Выполняет сброс режима разработчика для всех телевизоров
-   * @param {Array} tokenItems - Массив объектов с токенами
-   * @returns {Array} Результаты операций для каждого телевизора
+   * @param {TokenItem[]} tokenItems - Массив объектов с токенами
+   * @returns {Promise<ResetResult[]>} Результаты операций для каждого телевизора
    */
   async resetAllTVs(tokenItems) {
     let results = [];
