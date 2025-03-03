@@ -21,7 +21,7 @@ A simple Cloudflare Worker that automatically resets the developer mode counter 
 
 ### Overview
 
-LG TVs have a developer mode that expires after a certain period. This Cloudflare Worker automates the process of resetting the developer mode counter, preventing it from expiring. This is particularly useful for UNrooted LG TVs running custom applications.
+LG TVs have a developer mode that expires after a certain period. This Cloudflare Worker automates the process of resetting the developer mode counter, preventing it from expiring. This is particularly useful for NON-rooted LG TVs running custom applications.
 
 ### Features
 
