@@ -6,124 +6,103 @@
 
 A simple Cloudflare Worker that automatically resets the developer mode counter on NON-rooted LG TVs.
 
-**Language**: [English](#english) | [Русский](#russian)
+**Language**: [🇬🇧 English](#english) | [🇷🇺 Русский](#russian)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [How It Works](#how-it-works)
 
 ## English
 
-### Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Setup](#setup)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [How It Works](#how-it-works)
-
 ### Overview
 
-LG TVs have a developer mode that expires after a certain period. This Cloudflare Worker automates the process of resetting the developer mode counter, preventing it from expiring. This is particularly useful for NON-rooted LG TVs running custom applications.
+LG TVs have a developer mode that expires after a certain period. This Cloudflare Worker automates resetting the developer mode counter, preventing expiration. Useful for NON-rooted LG TVs running custom applications.
 
-### Features
+### Installation
 
-- Automatically resets developer mode on LG TVs
-- Can be triggered manually via HTTP request
-- Runs on a schedule using Cloudflare Workers
-- Supports multiple TVs simultaneously
-- Minimal code with no dependencies
-
-### Setup
-
-1. Create a new Cloudflare Worker
-2. Copy the code into the worker
-3. Set up environment variables for your TV tokens
-4. Configure the worker's trigger schedule (recommended: daily)
+1. Create a new Cloudflare Worker.
+2. Copy the code from [src/worker.js](src/worker.js) into the worker.
+3. Configure environment variables for your TV tokens.
+4. Set a schedule for the worker to run (recommended: daily).
 
 ### Configuration
 
-Add environment variables to your Cloudflare Worker with the following format:
+Add environment variables in this format:
 
-- `TOKEN_TV1`: Your first TV session token
-- `TOKEN_TV2`: Your second TV session token (if applicable)
-- etc.
+- `TOKEN_TV1`: Session token for the first TV.
+- `TOKEN_TV2`: Session token for the second TV.
 
-You can name these variables anything as long as they start with `TOKEN_TV`.
+Name these variables starting with `TOKEN_TV`.
 
-### Usage
+In the worker settings, set when to execute the cron job.
 
-The worker can be triggered in two ways:
-
-1. **Automatic**: The worker runs on your configured schedule
-2. **Manual**: Send an HTTP request to your worker's URL
+Cron
+```
+0 0 * * *
+```
+Schedule: Every night
 
 ### How It Works
 
-The worker performs these simple steps:
+The worker:
 
-1. Retrieves TV tokens from environment variables
-2. For each token, sends a request to LG's developer mode reset URL
-3. Processes requests in parallel for efficiency
+1. Retrieves TV tokens from environment variables.
+2. Sends a request to the LG developer mode reset URL for each token.
+3. Processes requests in parallel.
 
-The core functionality is performed by accessing:
+Access the main functionality at:
 ```
 https://developer.lge.com/secure/ResetDevMode.dev?sessionToken={YOUR_TOKEN}
 ```
 
-## Russian
+---
 
-### Содержание
-
-- [Обзор](#обзор)
-- [Возможности](#возможности)
-- [Установка](#установка)
-- [Настройка](#настройка)
-- [Использование](#использование)
-- [Принцип работы](#принцип-работы)
+## Русский
 
 ### Обзор
 
-Телевизоры LG имеют режим разработчика, который истекает через определенный период времени. Этот Cloudflare Worker автоматизирует процесс сброса счетчика режима разработчика, предотвращая его истечение. Это особенно полезно для НЕрутованных телевизоров LG, на которых запущены пользовательские приложения.
-
-### Возможности
-
-- Автоматический сброс режима разработчика на телевизорах LG
-- Возможность ручного запуска через HTTP-запрос
-- Работает по расписанию с использованием Cloudflare Workers
-- Поддерживает несколько телевизоров одновременно
-- Минимальный код без зависимостей
+Телевизоры LG имеют режим разработчика, который истекает через определенный период. Этот Cloudflare Worker автоматизирует сброс счетчика режима разработчика, предотвращая его истечение. Полезно для НЕрутованных телевизоров LG с пользовательскими приложениями.
 
 ### Установка
 
-1. Создайте новый Cloudflare Worker
-2. Скопируйте код в воркер
-3. Настройте переменные окружения для токенов ваших телевизоров
-4. Настройте расписание запуска воркера (рекомендуется: ежедневно)
+1. Создайте новый Cloudflare Worker.
+2. Скопируйте код из [src/worker.js](src/worker.js) в воркер.
+3. Настройте переменные окружения для токенов ваших телевизоров.
+4. Настройте расписание запуска воркера (рекомендуется: ежедневно).
 
 ### Настройка
 
-Добавьте переменные окружения в ваш Cloudflare Worker в следующем формате:
+Добавьте переменные окружения в следующем формате:
 
-- `TOKEN_TV1`: Токен сессии для первого телевизора
-- `TOKEN_TV2`: Токен сессии для второго телевизора (если применимо)
-- и т.д.
+- `TOKEN_TV1`: Токен сессии для первого телевизора.
+- `TOKEN_TV2`: Токен сессии для второго телевизора.
 
-Вы можете называть эти переменные как угодно, главное чтобы они начинались с `TOKEN_TV`.
+Назовите переменные, начиная с `TOKEN_TV`.
 
-### Использование
+В настройках воркера установите расписание выполнения задания.
 
-Воркер может быть запущен двумя способами:
-
-1. **Автоматически**: Воркер запускается по настроенному расписанию
-2. **Вручную**: Отправьте HTTP-запрос на URL вашего воркера
+Cron
+```
+0 0 * * *
+```
+Расписание: Каждый день
 
 ### Принцип работы
 
-Воркер выполняет следующие простые шаги:
+Воркер:
 
-1. Получает токены телевизоров из переменных окружения
-2. Для каждого токена отправляет запрос на URL сброса режима разработчика LG
-3. Обрабатывает запросы параллельно для эффективности
+1. Получает токены телевизоров из переменных окружения.
+2. Отправляет запрос на URL сброса режима разработчика LG для каждого токена.
+3. Обрабатывает запросы параллельно.
 
-Основная функциональность выполняется путем доступа к:
+Основная функциональность доступна по адресу:
 ```
 https://developer.lge.com/secure/ResetDevMode.dev?sessionToken={ВАШ_ТОКЕН}
 ```
+
+---
+
+Теперь логика более сжата и понятна, а ссылки на код добавлены. Также добавлены эмоджи для переключения языков.
