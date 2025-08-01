@@ -50,8 +50,58 @@ Schedule: Every night
 The worker:
 
 1. Retrieves TV tokens from environment variables.
-2. Sends a request to the LG developer mode reset URL for each token.
-3. Processes requests in parallel.
+2. Validates tokens format and length.
+3. Sends requests to the LG developer mode reset URL for each token in parallel.
+4. Provides detailed results with timestamps and error handling.
+5. Includes health check endpoint at `/health`.
+
+### New Features (v1.1.0)
+
+- **🚀 Parallel Processing**: Processes multiple TVs simultaneously for faster execution
+- **⚡ Request Timeouts**: 10-second timeout for each request to prevent hanging
+- **🔍 Enhanced Validation**: Better token validation with format checking
+- **📊 Detailed Statistics**: Summary with success/failure counts and timestamps
+- **🏥 Health Check**: `/health` endpoint for monitoring worker status
+- **🌐 CORS Support**: Enables browser-based requests with proper CORS headers
+- **📝 Better Logging**: More detailed logging for debugging and monitoring
+- **⚙️ Configuration**: Centralized configuration constants for easy maintenance
+
+### API Endpoints
+
+**Main Reset Endpoint**: `GET /`
+```json
+{
+  "summary": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0,
+    "timestamp": "2024-01-01T12:00:00.000Z"
+  },
+  "results": [
+    {
+      "tv": "TOKEN_TV1",
+      "status": 200,
+      "statusText": "OK",
+      "success": true,
+      "timestamp": "2024-01-01T12:00:00.000Z"
+    }
+  ]
+}
+```
+
+**Health Check**: `GET /health`
+```json
+{
+  "status": "healthy",
+  "version": "1.1.0",
+  "timestamp": "2024-01-01T12:00:00.000Z",
+  "config": {
+    "tokensConfigured": 2,
+    "requestTimeout": 10000,
+    "lgResetUrl": "https://developer.lge.com/secure/ResetDevModeSession.dev"
+  }
+}
+```
 
 Access the main functionality at:
 ```
@@ -95,8 +145,58 @@ Cron
 Воркер:
 
 1. Получает токены телевизоров из переменных окружения.
-2. Отправляет запрос на URL сброса режима разработчика LG для каждого токена.
-3. Обрабатывает запросы параллельно.
+2. Проверяет формат и длину токенов.
+3. Отправляет запросы на URL сброса режима разработчика LG для каждого токена параллельно.
+4. Предоставляет детальные результаты с временными метками и обработкой ошибок.
+5. Включает конечную точку проверки состояния по адресу `/health`.
+
+### Новые возможности (v1.1.0)
+
+- **🚀 Параллельная обработка**: Одновременная обработка нескольких телевизоров для быстрого выполнения
+- **⚡ Таймауты запросов**: 10-секундный таймаут для каждого запроса предотвращает зависание
+- **🔍 Улучшенная валидация**: Лучшая проверка токенов с проверкой формата
+- **📊 Детальная статистика**: Сводка с количеством успехов/неудач и временными метками
+- **🏥 Проверка здоровья**: Конечная точка `/health` для мониторинга состояния воркера
+- **🌐 Поддержка CORS**: Включает браузерные запросы с правильными CORS-заголовками
+- **📝 Лучшее логирование**: Более детальное логирование для отладки и мониторинга
+- **⚙️ Конфигурация**: Централизованные константы конфигурации для легкого обслуживания
+
+### API Конечные точки
+
+**Основная точка сброса**: `GET /`
+```json
+{
+  "summary": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0,
+    "timestamp": "2024-01-01T12:00:00.000Z"
+  },
+  "results": [
+    {
+      "tv": "TOKEN_TV1",
+      "status": 200,
+      "statusText": "OK",
+      "success": true,
+      "timestamp": "2024-01-01T12:00:00.000Z"
+    }
+  ]
+}
+```
+
+**Проверка здоровья**: `GET /health`
+```json
+{
+  "status": "healthy",
+  "version": "1.1.0",
+  "timestamp": "2024-01-01T12:00:00.000Z",
+  "config": {
+    "tokensConfigured": 2,
+    "requestTimeout": 10000,
+    "lgResetUrl": "https://developer.lge.com/secure/ResetDevModeSession.dev"
+  }
+}
+```
 
 Основная функциональность доступна по адресу:
 ```
